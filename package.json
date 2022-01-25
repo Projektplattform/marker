@@ -1,7 +1,7 @@
 {
   "name": "marker",
   "version": "0.1.0",
-  "homepage": "https://github.com/Projektplattform/marker.git", 
+  "homepage": "https://Projektplattform.github.io/marker", 
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.1",
