@@ -8,18 +8,28 @@ import {
 } from "react-simple-maps";
 import * as data from "./DEU.json";
 import { geoTransverseMercator } from "d3-geo";
-import ReactTooltip from "react-tooltip";
+
+function createTooltip({ name, coordinates }) {
+ 
+  return (
+    <>
+      <h3>
+        {name}
+        <p>
+          {coordinates}
+        </p>
+      </h3>
+    </>
+  );
+}
 
 const markers = [
-  {
-    markerOffset: -15,
-    name: "Neue Marker",
-    coordinates: [8,51]
-  },
+  { markerOffset: -15, name: "Neue Marker", coordinates: [8,51] },
   { markerOffset: -15, name: "test", coordinates: [8,50] },
-  { markerOffset: 25, name: "test2", coordinates: [9,50] }
+  { markerOffset: -15, name: "test2", coordinates: [9,50] }
   
 ];
+
 
 const MapChart = ({ setTooltipContent }) => {
   return (
@@ -38,35 +48,31 @@ const MapChart = ({ setTooltipContent }) => {
               <Geography
                 key={geo.rsmKey}
                 geography={geo}
-                onMouseEnter={() => {
-                  const { NAME_1, AUFTRAG } = geo.properties;
-                  setTooltipContent(`${NAME_1}: ${AUFTRAG}`);
-                }}
-                onMouseLeave={() => {
-                  setTooltipContent("");
-                }}
-                style={{
-                  default: {
-                    fill: "#D6D6DA",
-                    outline: "none"
-                  },
-                  hover: {
-                    fill: "#5500FF",
-                    outline: "none"
-                  },
-                  pressed: {
-                    fill: "#E42",
-                    outline: "none"
-                  }
-                }}
-                
-              />
+                fill="#dddddd" 
+                stroke="#000000"
+                strokeWidth={0}
+                />
             ))
         }
       </Geographies>
       {markers.map(({ name, coordinates, markerOffset }) => (
-        <Marker key={name} coordinates={coordinates}>
-          <circle r={10} fill="#F00" stroke="#fff" strokeWidth={2} />
+        <Marker 
+        key={name} 
+        coordinates={coordinates}
+        onMouseEnter={() =>
+          setTooltipContent(
+            createTooltip({
+              name,
+              coordinates
+            })
+          )
+        }
+      
+        onMouseLeave={() => {
+          setTooltipContent("");
+        }}
+        >
+          <circle r={5} fill="#0000dd" stroke="#ffffff" strokeWidth={0} />
           <text
             textAnchor="middle"
             y={markerOffset}

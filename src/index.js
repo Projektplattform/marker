@@ -11,7 +11,7 @@ function MapApp() {
     <div>
       <center>
       <h2>
-      Auftragseingang im Bauhauptgewerbe in Deutschland, 2020 [%]
+      TOP 10 Bauunternehmen Deutschland [Umsatz]
       </h2>
       <MapChart setTooltipContent={setContent} />
       <ReactTooltip>{content}</ReactTooltip>
