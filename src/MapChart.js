@@ -11,17 +11,14 @@ import * as data from "./DEU.json";
 import { geoTransverseMercator } from "d3-geo";
 import { zoom } from "d3";
 
-const width = 800;
-const height = 300;
-
 
 function createTooltip({ name, Bauleistung, Ergebnis, Mitarbeiter }) {
   return (
     <>
       <h3>
         {name}
-        <h5><p>Bauleistung [Mio]: {Bauleistung} €</p></h5>
-        <h5><p>Ergebnis vor Steuern [Mio]: {Ergebnis} €</p></h5>
+        <h5><p>Bauleistung [Mio]: € {Bauleistung}</p></h5>
+        <h5><p>Ergebnis vor Steuern [Mio]: € {Ergebnis}</p></h5>
         <h5><p>Mitarbeiter: {Mitarbeiter}</p></h5>
       </h3>
     </>
@@ -32,7 +29,7 @@ const CustomZoomableGroup = ({ children, ...restProps }) => {
   const { mapRef, transformString, position } = useZoomPan(restProps);
   return (
     <g ref={mapRef}>
-      <rect width={window.innerWidth} height={window.innerHeight-150} fill="transparent" />
+      <rect width={window.innerWidth} height={window.innerHeight} fill="transparent" />
       <g transform={transformString}>{children(position)}</g>
     </g>
   );
@@ -115,13 +112,15 @@ const MapChart = ({ setTooltipContent }) => {
   return (
     <ComposableMap
       data-tip=""
+      height={350}
+      //capHeight={1000}
       projection={
         (geoTransverseMercator()
           .scale(2000)
-          .center([8, 49.5])
+          .center([9, 51])
         )}
     >
-      <CustomZoomableGroup center={[8, 49.5]}>
+      <CustomZoomableGroup center={[9, 51]}>
       {position => (
           <>
       <Geographies geography={data}> 
@@ -132,10 +131,10 @@ const MapChart = ({ setTooltipContent }) => {
                 key={geo.rsmKey}
                 geography={geo}
                 fill="#dddddd" 
-                /*
+                
                 stroke="#ffffff"
-                strokeWidth={0.7}
-                */
+                strokeWidth={0.4}
+                
                 />
             ))
         }
@@ -160,6 +159,7 @@ const MapChart = ({ setTooltipContent }) => {
         }}
         >
           <circle r={5} fill="#0000dd" stroke="#ffffff" strokeWidth={0} />
+          
           <text
             textAnchor="middle"
             y={markerOffset}

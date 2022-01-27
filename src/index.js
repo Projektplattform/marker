@@ -11,6 +11,7 @@ function MapApp() {
     <div>
       <center>
       <h2>
+        
       TOP 10 Bauunternehmen in Deutschland 2020 [Umsatz]
       </h2>
       <MapChart setTooltipContent={setContent} />
