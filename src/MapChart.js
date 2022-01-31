@@ -36,7 +36,7 @@ const CustomZoomableGroup = ({ children, ...restProps }) => {
 };
 
 const markers = [
-  { markerOffset: -6,
+  { markerOffset: 6,
     name: "1. Hochtief", 
     Bauleistung: "22.985", 
     Ergebnis: "881,9", 
@@ -158,7 +158,8 @@ const MapChart = ({ setTooltipContent }) => {
           setTooltipContent("");
         }}
         >
-          <circle r={5} fill="#0000dd" stroke="#ffffff" strokeWidth={0} />
+          <circle r={1} fill="#2200ee" stroke="#ffffff" strokeWidth={0} />
+          <circle r={ parseFloat(Mitarbeiter) / 2 } fill="#0000dd" stroke="#ffffff" strokeWidth={0} opacity={0.1}/>
           
           <text
             textAnchor="middle"
